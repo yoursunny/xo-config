@@ -24,6 +24,7 @@ const js = {
     "unicorn/no-fn-reference-in-iterator": "off",
     "unicorn/no-nested-ternary": "off",
     "unicorn/prefer-spread": "off",
+    "unicorn/prefer-ternary": "off",
     "unicorn/prefer-type-error": "off",
     "unicorn/prevent-abbreviations": "off",
     "array-element-newline": "off",
@@ -75,6 +76,7 @@ const ts = {
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/brace-style": js.rules["brace-style"],
     "@typescript-eslint/class-literal-property-style": ["error", "fields"],
+    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/indent": js.rules.indent,
     "@typescript-eslint/member-ordering": "off",
@@ -114,6 +116,7 @@ const jest = {
     "@typescript-eslint/no-invalid-void-type": "off",
     "import/no-extraneous-dependencies": "off",
     "jest/expect-expect": "off",
+    "jest/no-conditional-expect": "off",
     "jest/no-standalone-expect": "off",
   },
 };

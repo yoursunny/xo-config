@@ -13,19 +13,19 @@ module.exports = {
     // Activate each combination, to trigger error if rule name has a typo.
     {
       files: [
-        "**/code/simple.js",
+        "**/code/javascript.js",
       ],
       ...merge(js, literate),
     },
     {
       files: [
-        "**/code/simple.ts",
+        "**/code/typescript.ts",
       ],
       ...merge(js, ts, jest, pptr),
     },
     {
       files: [
-        "**/code/simple.tsx",
+        "**/code/preact.tsx",
       ],
       ...merge(js, ts, web, preact),
     },

@@ -136,7 +136,7 @@ const jest = {
 const literate = {
   rules: {
     "@typescript-eslint/no-unsafe-call": "off",
-    "simple-import-sort/sort": "off",
+    "simple-import-sort/imports": "off",
     "unicorn/filename-case": "off",
     "padded-blocks": "off",
   },

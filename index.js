@@ -1,6 +1,14 @@
 /** @typedef {import("xo").Options} XoOptions */
 
 /**
+ * XO options to enable babel-eslint.
+ * @type {XoOptions}
+ */
+const babel = {
+  parser: "babel-eslint",
+};
+
+/**
  * XO options for JavaScript source.
  * @type {XoOptions}
  */
@@ -17,7 +25,7 @@ const js = {
     "import/extensions": "off",
     "import/no-mutable-exports": "off",
     "promise/param-names": "off",
-    "simple-import-sort/sort": "error",
+    "simple-import-sort/imports": "error",
     "unicorn/catch-error-name": ["error", { name: "err", caughtErrorsIgnorePattern: "^err" }],
     "unicorn/consistent-function-scoping": "off",
     "unicorn/filename-case": "off",
@@ -157,10 +165,22 @@ const preact = {
   rules: {
     "@typescript-eslint/no-unused-vars": "error",
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
-    "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
+    "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
     "react/jsx-no-bind": "off",
     "react/require-optimization": "off",
     "no-script-url": "off",
+  },
+};
+
+/**
+ * XO options for RE:DOM component.
+ * @type {XoOptions}
+ */
+const redom = {
+  envs: ["browser"],
+  rules: {
+    "import/no-unassigned-import": "off",
+    "no-unused-vars": ["error", { varsIgnorePattern: "(^el$)|(^[A-Z])" }],
   },
 };
 
@@ -195,16 +215,25 @@ function merge(base, ...patches) {
       }
     }
   }
+
+  if (!res.extends.includes("xo-typescript")) {
+    res.rules = Object.fromEntries(
+      Object.entries(res.rules)
+        .filter(([rule]) => !rule.startsWith("@typescript-eslint/")),
+    );
+  }
   return res;
 }
 
 module.exports = {
+  babel,
   js,
   ts,
   jest,
   literate,
   web,
   preact,
+  redom,
   pptr,
   merge,
 };

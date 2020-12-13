@@ -1,4 +1,4 @@
-const { js, ts, jest, literate, web, preact, pptr, merge } = require(".");
+const { babel, js, ts, jest, literate, web, preact, redom, pptr, merge } = require(".");
 
 /** @type {import("xo").Options} */
 module.exports = {
@@ -25,9 +25,21 @@ module.exports = {
     },
     {
       files: [
+        "**/code/preact.jsx",
+      ],
+      ...merge(babel, js, web, preact),
+    },
+    {
+      files: [
         "**/code/preact.tsx",
       ],
-      ...merge(js, ts, web, preact),
+      ...merge(js, ts, preact),
+    },
+    {
+      files: [
+        "**/code/redom.jsx",
+      ],
+      ...merge(babel, js, redom),
     },
   ],
 };

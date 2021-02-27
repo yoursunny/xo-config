@@ -24,6 +24,7 @@ const js = {
   rules: {
     "import/extensions": "off",
     "import/no-mutable-exports": "off",
+    "node/file-extension-in-import": "off",
     "promise/param-names": "off",
     "simple-import-sort/imports": "error",
     "unicorn/catch-error-name": ["error", { name: "err", caughtErrorsIgnorePattern: "^err" }],
@@ -33,6 +34,7 @@ const js = {
     "unicorn/no-array-reduce": "off",
     "unicorn/no-nested-ternary": "off",
     "unicorn/prefer-number-properties": ["error", { checkInfinity: false }],
+    "unicorn/prefer-regexp-test": "off",
     "unicorn/prefer-spread": "off",
     "unicorn/prefer-ternary": "off",
     "unicorn/prefer-type-error": "off",
@@ -96,6 +98,7 @@ const ts = {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/object-curly-spacing": ["error", "always"],
     "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/prefer-readonly": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
@@ -183,6 +186,7 @@ const redom = {
   envs: ["browser"],
   rules: {
     "import/no-unassigned-import": "off",
+    "no-unused-expressions": ["error", { enforceForJSX: false }],
     "no-unused-vars": ["error", { varsIgnorePattern: "(^el$)|(^[A-Z])" }],
   },
 };

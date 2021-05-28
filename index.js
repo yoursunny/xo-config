@@ -22,6 +22,7 @@ const js = {
   ],
   rules: {
     "import/extensions": "off",
+    "import/first": "off",
     "import/no-mutable-exports": "off",
     "import/order": "off",
     "node/file-extension-in-import": "off",
@@ -166,6 +167,7 @@ const web = {
   envs: ["browser"],
   globals: [
     "WebSocket",
+    "WebTransport",
   ],
 };
 
@@ -182,6 +184,8 @@ const preact = {
     "@typescript-eslint/no-unused-vars": "error",
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": ["error", 2],
     "react/jsx-no-bind": "off",
     "react/require-optimization": "off",
     "no-script-url": "off",

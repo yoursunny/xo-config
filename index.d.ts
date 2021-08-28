@@ -1,6 +1,6 @@
 import type { Options as XoOptions } from "xo";
 
-/** XO options to enable babel-eslint. */
+/** XO options to enable @babel/eslint-parser. */
 declare const babel: XoOptions;
 
 /** XO options for JavaScript source. */

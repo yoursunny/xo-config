@@ -5,7 +5,13 @@
  * @type {XoOptions}
  */
 const babel = {
-  parser: "babel-eslint",
+  parser: "@babel/eslint-parser",
+  parserOptions: {
+    babelOptions: {
+      plugins: ["@babel/plugin-syntax-jsx"],
+    },
+    requireConfigFile: false,
+  },
 };
 
 /**
@@ -26,6 +32,8 @@ const js = {
     "import/no-mutable-exports": "off",
     "import/order": "off",
     "node/file-extension-in-import": "off",
+    "node/prefer-global/buffer": ["error", "always"],
+    "node/prefer-global/process": ["error", "always"],
     "promise/param-names": "off",
     "simple-import-sort/imports": "error",
     "unicorn/catch-error-name": ["error", { name: "err", caughtErrorsIgnorePattern: "^err" }],
@@ -36,7 +44,6 @@ const js = {
     "unicorn/no-nested-ternary": "off",
     "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-module": "off",
-    "unicorn/prefer-node-protocol": "off",
     "unicorn/prefer-number-properties": ["error", { checkInfinity: false }],
     "unicorn/prefer-regexp-test": "off",
     "unicorn/prefer-spread": "off",
@@ -71,6 +78,7 @@ const js = {
     "no-return-assign": "off",
     "no-warning-comments": "off",
     "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": ["error", "after"],
     "padded-blocks": ["error", "never", { allowSingleLineBlocks: true }],
     "padding-line-between-statements": "off",
     "prefer-destructuring": "off",

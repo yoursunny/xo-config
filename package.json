@@ -1,6 +1,6 @@
 {
   "name": "@yoursunny/xo-config",
-  "version": "0.45.0",
+  "version": "0.45.1",
   "description": "XO linter configuration overrides",
   "author": "Junxiao Shi <npm@mail1.yoursunny.com>",
   "license": "Unlicense",

@@ -195,6 +195,7 @@ const preact = {
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-no-bind": "off",
+    "react/no-unknown-property": "off",
     "react/require-optimization": "off",
     "no-script-url": "off",
   },

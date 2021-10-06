@@ -27,9 +27,5 @@ declare const redom: XoOptions;
 /** XO options for Puppeteer script. */
 declare const pptr: XoOptions;
 
-/**
- * Merge XO options.
- * @param {XoOptions} base
- * @param  {...XoOptions} patches
- */
-declare function merge(base, ...patches): XoOptions;
+/** Merge XO options. */
+declare function merge(base: XoOptions, ...patches: XoOptions[]): XoOptions;

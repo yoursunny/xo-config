@@ -39,6 +39,7 @@ const js = {
     "unicorn/consistent-function-scoping": "off",
     "unicorn/filename-case": "off",
     "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-array-push-push": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/no-await-expression-member": "off",
     "unicorn/no-nested-ternary": "off",
@@ -155,6 +156,7 @@ const jest = {
   ],
   rules: {
     "@typescript-eslint/no-invalid-void-type": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
     "import/no-extraneous-dependencies": "off",
     "jest/expect-expect": "off",
     "jest/no-conditional-expect": "off",
@@ -255,10 +257,11 @@ function merge(base, ...patches) {
   }
 
   if (!res.extends.includes("xo-typescript")) {
-    res.rules = Object.fromEntries(
-      Object.entries(res.rules)
-        .filter(([rule]) => !rule.startsWith("@typescript-eslint/")),
-    );
+    for (const key of Object.keys(res.rules)) {
+      if (key.startsWith("@typescript-eslint/")) {
+        delete res.rules[key];
+      }
+    }
   }
   return res;
 }

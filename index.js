@@ -1,7 +1,7 @@
 /** @typedef {import("xo").Options} XoOptions */
 
 /**
- * XO options to enable babel-eslint.
+ * XO options to enable @babel/eslint-parser.
  * @type {XoOptions}
  */
 const babel = {
@@ -70,6 +70,7 @@ const js = {
       FunctionExpression: { parameters: 2 },
       flatTernaryExpressions: true,
     }],
+    "jsx-quotes": ["error", "prefer-double"],
     "max-params": "off",
     "max-statements-per-line": ["error", { max: 3 }],
     "new-cap": "off",
@@ -105,11 +106,9 @@ const ts = {
   ],
   rules: {
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/brace-style": js.rules["brace-style"],
     "@typescript-eslint/class-literal-property-style": ["error", "fields"],
     "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/indent": js.rules.indent,
     "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-base-to-string": "off",
@@ -129,22 +128,22 @@ const ts = {
     "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/prefer-readonly": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
-    "@typescript-eslint/quotes": js.rules.quotes,
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/switch-exhaustiveness-check": "off",
     "@typescript-eslint/unified-signatures": "off",
     "import/export": "off",
     "import/no-cycle": "off",
     "import/no-unassigned-import": "off",
-    "brace-style": "off",
-    indent: "off",
     "no-redeclare": "off",
     "no-return-await": "off",
     "no-unused-vars": "off",
     "no-useless-constructor": "off",
-    quotes: "off",
   },
 };
+for (const rule of ["brace-style", "indent", "quotes"]) {
+  ts.rules[`@typescript-eslint/${rule}`] = js.rules[rule];
+  ts.rules[rule] = "off";
+}
 
 /**
  * XO options for Jest test suite.
@@ -257,6 +256,7 @@ function merge(base, ...patches) {
   }
 
   if (!res.extends.includes("xo-typescript")) {
+    res.rules = { ...res.rules };
     for (const key of Object.keys(res.rules)) {
       if (key.startsWith("@typescript-eslint/")) {
         delete res.rules[key];

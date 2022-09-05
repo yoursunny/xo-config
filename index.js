@@ -108,6 +108,7 @@ const ts = {
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/class-literal-property-style": ["error", "fields"],
     "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/naming-convention": "off",

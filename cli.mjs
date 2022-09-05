@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-import { execaNode } from "execa";
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
+
+import { execaNode } from "execa";
 
 const require = createRequire(import.meta.url);
 const selfPath = dirname(require.resolve("."));

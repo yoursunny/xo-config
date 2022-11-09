@@ -33,6 +33,7 @@ const js = {
     "import/order": "off",
     "n/file-extension-in-import": "off",
     "n/prefer-global/buffer": ["error", "always"],
+    "n/prefer-global/console": "off",
     "n/prefer-global/process": ["error", "always"],
     "simple-import-sort/imports": "error",
     "unicorn/catch-error-name": ["error", { name: "err", ignore: ["^err"] }],
@@ -197,6 +198,11 @@ const preact = {
   extends: [
     "xo-preact",
   ],
+  settings: {
+    react: {
+      version: "18.0.0",
+    },
+  },
   envs: ["browser"],
   rules: {
     "@typescript-eslint/no-unused-vars": "error",
@@ -204,6 +210,13 @@ const preact = {
     "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
+    "react/jsx-space-before-closing": "off",
+    "react/jsx-tag-spacing": ["error", {
+      closingSlash: "never",
+      beforeSelfClosing: "never",
+      afterOpening: "never",
+      beforeClosing: "proportional-always",
+    }],
     "react/jsx-no-bind": "off",
     "react/no-unknown-property": "off",
     "react/require-optimization": "off",

@@ -19,7 +19,7 @@ const babel = {
  * @type {XoOptions}
  */
 const js = {
-  envs: ["es2020"],
+  envs: ["es2022"],
   plugins: [
     "simple-import-sort",
   ],

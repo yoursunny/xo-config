@@ -9,9 +9,6 @@ declare const js: XoOptions;
 /** XO options for TypeScript source. */
 declare const ts: XoOptions;
 
-/** XO options for Jest test suite. */
-declare const jest: XoOptions;
-
 /** XO options for literate programming. */
 declare const literate: XoOptions;
 

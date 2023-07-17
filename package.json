@@ -1,6 +1,6 @@
 {
   "name": "@yoursunny/xo-config",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "description": "XO linter configuration overrides",
   "author": "Junxiao Shi <npm@mail1.yoursunny.com>",
   "license": "Unlicense",
@@ -21,23 +21,21 @@
   "scripts": {
     "test": "node cli.mjs"
   },
-  "packageManager": "pnpm@8.5.0",
+  "packageManager": "pnpm@8.6.8",
   "dependencies": {
-    "@babel/core": "^7.21.8",
-    "@babel/eslint-parser": "^7.21.8",
-    "@babel/plugin-syntax-jsx": "^7.21.4",
+    "@babel/core": "^7.22.9",
+    "@babel/eslint-parser": "^7.22.9",
+    "@babel/plugin-syntax-jsx": "^7.22.5",
     "eslint-config-xo-preact": "^1.0.0",
     "eslint-config-xo-react": "^0.27.0",
-    "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "execa": "^7.1.1",
-    "xo": "^0.54.2"
+    "xo": "^0.55.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.21.5",
+    "@babel/plugin-transform-react-jsx": "^7.22.5",
     "babel-plugin-transform-redom-jsx": "^3.0.5",
-    "jest": "^29.5.0",
-    "typescript": "~5.0.4"
+    "typescript": "~5.1.6"
   }
 }

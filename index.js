@@ -122,6 +122,7 @@ const ts = {
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-declaration-merging": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unused-vars": "off",
@@ -146,24 +147,6 @@ for (const rule of ["brace-style", "indent", "quotes"]) {
   ts.rules[`@typescript-eslint/${rule}`] = js.rules[rule];
   ts.rules[rule] = "off";
 }
-
-/**
- * XO options for Jest test suite.
- * @type {XoOptions}
- */
-const jest = {
-  extends: [
-    "plugin:jest/recommended",
-  ],
-  rules: {
-    "@typescript-eslint/no-invalid-void-type": "off",
-    "@typescript-eslint/restrict-plus-operands": "off",
-    "import/no-extraneous-dependencies": "off",
-    "jest/expect-expect": "off",
-    "jest/no-conditional-expect": "off",
-    "jest/no-standalone-expect": "off",
-  },
-};
 
 /**
  * XO options for literate programming.
@@ -284,7 +267,6 @@ module.exports = {
   babel,
   js,
   ts,
-  jest,
   literate,
   web,
   preact,

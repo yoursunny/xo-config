@@ -229,7 +229,6 @@ const pptr = {
     "browser",
     "context",
     "page",
-    "jestPuppeteer",
   ],
 };
 

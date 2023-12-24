@@ -47,6 +47,7 @@ const js = {
     "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-export-from": "off",
     "unicorn/prefer-json-parse-buffer": "off",
+    "unicorn/prefer-math-trunc": "off",
     "unicorn/prefer-module": "off",
     "unicorn/prefer-number-properties": ["error", { checkInfinity: false }],
     "unicorn/prefer-regexp-test": "off",

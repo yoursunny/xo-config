@@ -105,6 +105,7 @@ const js = {
 const ts = {
   extends: [
     "xo-typescript",
+    "plugin:etc/recommended",
   ],
   rules: {
     "@typescript-eslint/ban-types": "off",
@@ -135,6 +136,7 @@ const ts = {
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/switch-exhaustiveness-check": "off",
     "@typescript-eslint/unified-signatures": "off",
+    "etc/no-const-enum": ["error", { allowLocal: true }],
     "import/export": "off",
     "import/no-cycle": "off",
     "import/no-unassigned-import": "off",

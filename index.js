@@ -19,7 +19,7 @@ const babel = {
  * @type {XoOptions}
  */
 const js = {
-  envs: ["es2022"],
+  envs: ["es2023"],
   plugins: [
     "simple-import-sort",
   ],
@@ -35,6 +35,7 @@ const js = {
     "n/prefer-global/buffer": ["error", "always"],
     "n/prefer-global/console": "off",
     "n/prefer-global/process": ["error", "always"],
+    "no-use-extend-native/no-use-extend-native": "off",
     "simple-import-sort/imports": "error",
     "unicorn/catch-error-name": ["error", { name: "err", ignore: ["^err"] }],
     "unicorn/consistent-function-scoping": "off",
@@ -86,6 +87,7 @@ const js = {
     "no-promise-executor-return": "off",
     "no-return-assign": "off",
     "no-warning-comments": "off",
+    "object-curly-newline": "off",
     "object-curly-spacing": ["error", "always"],
     "object-shorthand": "off",
     "operator-linebreak": ["error", "after"],
@@ -103,6 +105,9 @@ const js = {
  * @type {XoOptions}
  */
 const ts = {
+  plugins: [
+    "tsdoc",
+  ],
   extends: [
     "xo-typescript",
     "plugin:etc/recommended",
@@ -140,6 +145,7 @@ const ts = {
     "import/export": "off",
     "import/no-cycle": "off",
     "import/no-unassigned-import": "off",
+    "tsdoc/syntax": "warn",
     "no-redeclare": "off",
     "no-return-await": "off",
     "no-unused-vars": "off",

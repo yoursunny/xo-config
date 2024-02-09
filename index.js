@@ -119,6 +119,7 @@ const ts = {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/member-ordering": "off",
+    "@typescript-eslint/method-signature-style": ["error", "property"],
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-base-to-string": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",

@@ -181,6 +181,9 @@ const web = {
     "WebSocket",
     "WebTransport",
   ],
+  rules: {
+    "n/no-unsupported-features/node-builtins": "off",
+  },
 };
 
 /**

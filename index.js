@@ -1,37 +1,106 @@
-/** @typedef {import("xo").Options} XoOptions */
+import babelParser from "@babel/eslint-parser";
+import eslintPreact from "eslint-config-preact";
+import xoBrowser from "eslint-config-xo/browser";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import tsdoc from "eslint-plugin-tsdoc";
+
+/** @typedef {import("xo").XoConfigItem} XoConfigItem */
+
+/**
+ * Merge XO options.
+ * @param {XoConfigItem} base
+ * @param  {...XoConfigItem} patches
+ */
+export function merge(base, ...patches) {
+  const res = { ...base };
+  for (const patch of patches) {
+    for (const [key, value] of Object.entries(patch)) {
+      if (Array.isArray(res[key])) {
+        res[key] = [...res[key], ...value];
+      } else if (typeof res[key] === "object") {
+        res[key] = { ...res[key], ...value };
+      } else {
+        res[key] = value;
+      }
+    }
+  }
+
+  return res;
+}
+
+/**
+ * Delete typescript-eslint rules.
+ * @param {XoConfigItem} base
+ * @param  {...XoConfigItem} patches
+ */
+export function stripTs(config) {
+  config.rules = { ...config.rules };
+  for (const key of Object.keys(config.rules)) {
+    if (key.startsWith("@typescript-eslint/")) {
+      delete config.rules[key];
+    }
+  }
+  return config;
+}
 
 /**
  * XO options to enable @babel/eslint-parser.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const babel = {
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    babelOptions: {
-      plugins: ["@babel/plugin-syntax-jsx"],
+export const babel = {
+  languageOptions: {
+    parser: babelParser,
+    parserOptions: {
+      babelOptions: {
+        plugins: ["@babel/plugin-syntax-jsx"],
+      },
+      requireConfigFile: false,
     },
-    requireConfigFile: false,
   },
 };
 
 /**
  * XO options for JavaScript source.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const js = {
-  envs: ["es2023"],
-  plugins: [
-    "simple-import-sort",
-  ],
-  extends: [
-    "xo",
-  ],
+export const js = {
+  plugins: {
+    "simple-import-sort": simpleImportSort,
+  },
   rules: {
-    "import/extensions": "off",
-    "import/first": "off",
-    "import/no-mutable-exports": "off",
-    "import/order": "off",
+    "@stylistic/array-element-newline": "off",
+    "@stylistic/arrow-parens": ["error", "always"],
+    "@stylistic/block-spacing": ["error", "always"],
+    "@stylistic/brace-style": ["error", "1tbs", { allowSingleLine: true }],
+    "@stylistic/function-call-argument-newline": "off",
+    "@stylistic/generator-star-spacing": ["error", { named: "after", anonymous: "neither", method: "before" }],
+    "@stylistic/indent": ["error", 2, {
+      SwitchCase: 1,
+      VariableDeclarator: "first",
+      outerIIFEBody: 0,
+      FunctionDeclaration: { parameters: 2 },
+      FunctionExpression: { parameters: 2 },
+      flatTernaryExpressions: true,
+    }],
+    "@stylistic/indent-binary-ops": ["error", 2],
+    "@stylistic/jsx-quotes": ["error", "prefer-double"],
+    "@stylistic/max-len": "off",
+    "@stylistic/max-statements-per-line": ["error", { max: 3 }],
+    "@stylistic/multiline-ternary": "off",
+    "@stylistic/no-mixed-operators": "off",
+    "@stylistic/object-curly-newline": "off",
+    "@stylistic/object-curly-spacing": ["error", "always"],
+    "@stylistic/operator-linebreak": ["error", "after"],
+    "@stylistic/padded-blocks": ["error", "never", { allowSingleLineBlocks: true }],
+    "@stylistic/padding-line-between-statements": "off",
+    "@stylistic/quotes": ["error", "double"],
+    "@stylistic/yield-star-spacing": ["error", "after"],
+    "import-x/extensions": "off",
+    "import-x/first": "off",
+    "import-x/no-mutable-exports": "off",
+    "import-x/order": "off",
     "n/file-extension-in-import": "off",
+    "n/no-extraneous-import": "off",
     "n/prefer-global/buffer": ["error", "always"],
     "n/prefer-global/console": "off",
     "n/prefer-global/process": ["error", "always"],
@@ -41,7 +110,6 @@ const js = {
     "unicorn/consistent-function-scoping": "off",
     "unicorn/filename-case": "off",
     "unicorn/no-array-callback-reference": "off",
-    "unicorn/no-array-push-push": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/no-await-expression-member": "off",
     "unicorn/no-nested-ternary": "off",
@@ -52,30 +120,15 @@ const js = {
     "unicorn/prefer-module": "off",
     "unicorn/prefer-number-properties": ["error", { checkInfinity: false }],
     "unicorn/prefer-regexp-test": "off",
+    "unicorn/prefer-single-call": "off",
     "unicorn/prefer-spread": "off",
     "unicorn/prefer-ternary": "off",
     "unicorn/prefer-type-error": "off",
     "unicorn/prevent-abbreviations": "off",
-    "array-element-newline": "off",
-    "arrow-parens": ["error", "always"],
-    "brace-style": ["error", "1tbs", { allowSingleLine: true }],
     "capitalized-comments": "off",
-    "comma-dangle": ["error", "always-multiline"],
     "constructor-super": "off",
     "default-case": "off",
-    "function-call-argument-newline": "off",
-    "generator-star-spacing": ["error", { named: "after", anonymous: "neither", method: "before" }],
-    indent: ["error", 2, {
-      SwitchCase: 1,
-      VariableDeclarator: "first",
-      outerIIFEBody: 0,
-      FunctionDeclaration: { parameters: 2 },
-      FunctionExpression: { parameters: 2 },
-      flatTernaryExpressions: true,
-    }],
-    "jsx-quotes": ["error", "prefer-double"],
     "max-params": "off",
-    "max-statements-per-line": ["error", { max: 3 }],
     "new-cap": "off",
     "no-await-in-loop": "off",
     "no-bitwise": "off",
@@ -83,39 +136,26 @@ const js = {
     "no-implicit-coercion": ["error", { allow: ["!!"] }],
     "no-inner-declarations": "off",
     "no-lone-blocks": "off",
-    "no-mixed-operators": "off",
     "no-promise-executor-return": "off",
     "no-return-assign": "off",
     "no-warning-comments": "off",
-    "object-curly-newline": "off",
-    "object-curly-spacing": ["error", "always"],
     "object-shorthand": "off",
-    "operator-linebreak": ["error", "after"],
-    "padded-blocks": ["error", "never", { allowSingleLineBlocks: true }],
-    "padding-line-between-statements": "off",
     "prefer-destructuring": "off",
     "prefer-template": "error",
-    quotes: ["error", "double"],
-    "yield-star-spacing": ["error", "after"],
   },
 };
 
 /**
  * XO options for TypeScript source.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const ts = {
-  plugins: [
-    "tsdoc",
-  ],
-  extends: [
-    "xo-typescript",
-    "plugin:etc/recommended",
-  ],
+export const ts = {
+  plugins: {
+    tsdoc,
+  },
   rules: {
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/class-literal-property-style": ["error", "fields"],
-    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/member-ordering": "off",
@@ -123,6 +163,7 @@ const ts = {
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-base-to-string": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-redeclare": "off",
@@ -134,18 +175,15 @@ const ts = {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/object-curly-spacing": ["error", "always"],
-    "@typescript-eslint/padding-line-between-statements": "off",
-    "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/prefer-readonly": "off",
+    "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/switch-exhaustiveness-check": "off",
     "@typescript-eslint/unified-signatures": "off",
-    "etc/no-const-enum": ["error", { allowLocal: true }],
-    "import/export": "off",
-    "import/no-cycle": "off",
-    "import/no-unassigned-import": "off",
+    "import-x/export": "off",
+    "import-x/no-cycle": "off",
+    "import-x/no-unassigned-import": "off",
     "tsdoc/syntax": "warn",
     "no-redeclare": "off",
     "no-return-await": "off",
@@ -153,54 +191,44 @@ const ts = {
     "no-useless-constructor": "off",
   },
 };
-for (const rule of ["brace-style", "indent", "quotes"]) {
-  ts.rules[`@typescript-eslint/${rule}`] = js.rules[rule];
-  ts.rules[rule] = "off";
-}
 
 /**
  * XO options for literate programming.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const literate = {
+export const literate = {
   rules: {
+    "@stylistic/padded-blocks": "off",
     "@typescript-eslint/no-unsafe-call": "off",
     "simple-import-sort/imports": "off",
     "unicorn/filename-case": "off",
-    "padded-blocks": "off",
+    "unicorn/no-process-exit": "off",
   },
 };
 
 /**
  * XO options for web page.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const web = {
-  envs: ["browser"],
-  globals: [
-    "WebSocket",
-    "WebTransport",
-  ],
+export const web = {
+  languageOptions: {
+    globals: xoBrowser[0].languageOptions.globals,
+  },
   rules: {
     "n/no-unsupported-features/node-builtins": "off",
+    "no-restricted-globals": xoBrowser[0].rules["no-restricted-globals"],
   },
 };
 
 /**
  * XO options for Preact component.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const preact = {
-  extends: [
-    "xo-preact",
-  ],
-  settings: {
-    react: {
-      version: "18.0.0",
-    },
-  },
-  envs: ["browser"],
+export const preact = {
+  plugins: eslintPreact[1].plugins,
+  settings: eslintPreact[1].settings,
   rules: {
+    ...Object.fromEntries(Object.entries(eslintPreact[1].rules).filter(([k]) => k.startsWith("react"))),
     "@typescript-eslint/no-unused-vars": "error",
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
@@ -222,10 +250,9 @@ const preact = {
 
 /**
  * XO options for RE:DOM component.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const redom = {
-  envs: ["browser"],
+export const redom = {
   rules: {
     "import/no-unassigned-import": "off",
     "no-unused-expressions": ["error", { enforceForJSX: false }],
@@ -235,54 +262,14 @@ const redom = {
 
 /**
  * XO options for Puppeteer script.
- * @type {XoOptions}
+ * @type {XoConfigItem}
  */
-const pptr = {
-  globals: [
-    "browser",
-    "context",
-    "page",
-  ],
-};
-
-/**
- * Merge XO options.
- * @param {XoOptions} base
- * @param  {...XoOptions} patches
- */
-function merge(base, ...patches) {
-  const res = { ...base };
-  for (const patch of patches) {
-    for (const [key, value] of Object.entries(patch)) {
-      if (Array.isArray(res[key])) {
-        res[key] = [...res[key], ...value];
-      } else if (typeof res[key] === "object") {
-        res[key] = { ...res[key], ...value };
-      } else {
-        res[key] = value;
-      }
-    }
-  }
-
-  if (!res.extends.includes("xo-typescript")) {
-    res.rules = { ...res.rules };
-    for (const key of Object.keys(res.rules)) {
-      if (key.startsWith("@typescript-eslint/")) {
-        delete res.rules[key];
-      }
-    }
-  }
-  return res;
-}
-
-module.exports = {
-  babel,
-  js,
-  ts,
-  literate,
-  web,
-  preact,
-  redom,
-  pptr,
-  merge,
+export const pptr = {
+  languageOptions: {
+    globals: {
+      browser: false,
+      context: false,
+      page: false,
+    },
+  },
 };

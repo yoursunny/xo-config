@@ -242,6 +242,7 @@ export const preact = {
       beforeClosing: "proportional-always",
     }],
     "react/jsx-no-bind": "off",
+    "react/no-did-mount-set-state": "off",
     "react/no-unknown-property": "off",
     "react/require-optimization": "off",
     "no-script-url": "off",

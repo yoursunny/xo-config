@@ -1,6 +1,6 @@
 {
   "name": "@yoursunny/xo-config",
-  "version": "0.1001.1",
+  "version": "0.1002.0",
   "description": "XO linter configuration overrides",
   "author": "Junxiao Shi <npm@mail1.yoursunny.com>",
   "license": "0BSD",
@@ -21,20 +21,20 @@
   "scripts": {
     "test": "node cli.mjs"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad",
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6",
   "dependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/eslint-parser": "^7.28.0",
+    "@babel/core": "^7.28.5",
+    "@babel/eslint-parser": "^7.28.5",
     "@babel/plugin-syntax-jsx": "^7.27.1",
-    "eslint": "^9.31.0",
-    "eslint-config-preact": "github:preactjs/eslint-config-preact#6564f41647a98d3e09d669fa9670ae8660ca5911",
-    "eslint-config-xo": "^0.47.0",
+    "eslint": "^9.39.2",
+    "eslint-config-preact": "^2.0.0",
+    "eslint-config-xo": "^0.49.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-tsdoc": "^0.4.0",
-    "execa": "^9.6.0",
-    "xo": "^1.1.1"
+    "eslint-plugin-tsdoc": "^0.5.0",
+    "execa": "^9.6.1",
+    "xo": "^1.2.3"
   },
   "devDependencies": {
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.3"
   }
 }
